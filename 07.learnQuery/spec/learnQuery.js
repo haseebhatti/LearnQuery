@@ -1,19 +1,19 @@
 /*global affix, learnQuery*/
 
-describe('LearnQuery', function() {
+xdescribe('LearnQuery', function () {
   'use strict';
 
   var $selectedElement, selectedElement, methods;
 
-  beforeEach(function() {
+  beforeEach(function () {
     affix('.learn-query-testing #toddler .hidden.toy+h1[class="title"]+span[class="subtitle"]+input[name="toyName"][value="cuddle bunny"]+input[class="creature"][value="unicorn"]+.hidden+.infinum[value="awesome cool"]');
 
     methods = {
-      showLove: function() {
+      showLove: function () {
         console.log('<3 JavaScript <3');
       },
 
-      giveLove: function() {
+      giveLove: function () {
         console.log('==> JavaScript ==>');
         return '==> JavaScript ==>';
       }
@@ -26,14 +26,14 @@ describe('LearnQuery', function() {
     selectedElement = $selectedElement.get(0);
   });
 
-  it('should allow cssClass method chaining', function() {
+  it('should allow cssClass method chaining', function () {
     learnQuery('#toddler').addClass('one').addClass('two').removeClass('one');
 
     expect($selectedElement.hasClass('one')).toBe(false);
     expect($selectedElement.hasClass('two')).toBe(true);
   });
 
-  it('should allow dom method chaining', function() {
+  it('should allow dom method chaining', function () {
     var newElementH4 = document.createElement('h4');
     var newElementH2 = document.createElement('h2');
     var newElementSpan = document.createElement('span');
@@ -45,14 +45,14 @@ describe('LearnQuery', function() {
     expect($selectedElement.children().last()[0]).toBe(newElementSpan);
   });
 
-  it('should allow eventListener method chaining', function() {
+  it('should allow eventListener method chaining', function () {
     learnQuery('#toddler').on('click', methods.showLove).on('click', methods.giveLove).trigger('click');
 
     expect(methods.showLove.calls.count()).toBe(1);
     expect(methods.giveLove.calls.count()).toBe(1);
   });
 
-  it('should allow multiple methods chaining', function() {
+  it('should allow multiple methods chaining', function () {
     var newElementH4 = document.createElement('h4');
 
     learnQuery('#toddler').before(newElementH4).addClass('blury').on('hover', methods.showLove).trigger('hover');

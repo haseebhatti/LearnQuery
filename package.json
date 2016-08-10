@@ -1,0 +1,19 @@
+{
+  "name": "learnquery",
+  "version": "1.0.0",
+  "description": "Your assignment will be to build your own jQuery library through a series of different steps. This will help you learn JavaScript.\r All tasks are jQuery equivalent methods.",
+  "main": "karma.conf.js",
+  "scripts": {
+    "test": "karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/infinum/learnQuery.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/infinum/learnQuery/issues"
+  },
+  "homepage": "https://github.com/infinum/learnQuery#readme"
+}

@@ -1,20 +1,20 @@
 /*global affix*/
 /*global eventListener*/
 
-describe('EventListeners', function() {
+xdescribe('EventListeners', function () {
   'use strict';
 
   var $selectedElement, selectedElement, methods;
 
-  beforeEach(function() {
+  beforeEach(function () {
     affix('.learn-query-testing #toddler .hidden.toy+h1[class="title"]+span[class="subtitle"]+span[class="subtitle"]+input[name="toyName"][value="cuddle bunny"]+input[class="creature"][value="unicorn"]+.hidden+.infinum[value="awesome cool"]');
 
     methods = {
-      showLove: function() {
+      showLove: function () {
         console.log('<3 JavaScript <3');
       },
 
-      giveLove: function() {
+      giveLove: function () {
         console.log('==> JavaScript ==>');
         return '==> JavaScript ==>';
       }
@@ -27,7 +27,7 @@ describe('EventListeners', function() {
     selectedElement = $selectedElement[0];
   });
 
-  it('should be able to add a click event to an HTML element', function() {
+  it('should be able to add a click event to an HTML element', function () {
     eventListener.on(selectedElement, 'click', methods.showLove);
 
     $selectedElement.click();
@@ -35,7 +35,7 @@ describe('EventListeners', function() {
     expect(methods.showLove).toHaveBeenCalled();
   });
 
-  it('should be able to add the same event+callback two times to an HTML element', function() {
+  it('should be able to add the same event+callback two times to an HTML element', function () {
     eventListener.on(selectedElement, 'click', methods.showLove);
     eventListener.on(selectedElement, 'click', methods.showLove);
 
@@ -44,8 +44,7 @@ describe('EventListeners', function() {
     expect(methods.showLove.calls.count()).toEqual(2);
   });
 
-
-  it('should be able to add the same callback for two different events to an HTML element', function() {
+  it('should be able to add the same callback for two different events to an HTML element', function () {
     eventListener.on(selectedElement, 'click', methods.showLove);
     eventListener.on(selectedElement, 'hover', methods.showLove);
 
@@ -55,7 +54,7 @@ describe('EventListeners', function() {
     expect(methods.showLove.calls.count()).toEqual(2);
   });
 
-  it('should be able to add two different callbacks for same event to an HTML element', function() {
+  it('should be able to add two different callbacks for same event to an HTML element', function () {
     eventListener.on(selectedElement, 'click', methods.showLove);
     eventListener.on(selectedElement, 'click', methods.giveLove);
 
@@ -65,7 +64,7 @@ describe('EventListeners', function() {
     expect(methods.giveLove.calls.count()).toEqual(1);
   });
 
-  it('should be able to remove one event handler of an HTML element', function() {
+  it('should be able to remove one event handler of an HTML element', function () {
     $selectedElement.off();
 
     eventListener.on(selectedElement, 'click', methods.showLove);
@@ -78,7 +77,7 @@ describe('EventListeners', function() {
     expect(methods.giveLove.calls.count()).toEqual(1);
   });
 
-  it('should be able to remove all click events of a HTML element', function() {
+  it('should be able to remove all click events of a HTML element', function () {
     $selectedElement.off();
 
     eventListener.on(selectedElement, 'click', methods.showLove);
@@ -94,7 +93,7 @@ describe('EventListeners', function() {
     expect(methods.giveLove).not.toHaveBeenCalled();
   });
 
-  it('should be able to remove all events of a HTML element', function() {
+  it('should be able to remove all events of a HTML element', function () {
     $selectedElement.off();
 
     eventListener.on(selectedElement, 'click', methods.showLove);
@@ -113,7 +112,7 @@ describe('EventListeners', function() {
     expect(methods.giveLove).not.toHaveBeenCalled();
   });
 
-  it('should trigger a click event on a HTML element', function() {
+  it('should trigger a click event on a HTML element', function () {
     $selectedElement.off();
     $selectedElement.on('click', methods.showLove);
 
@@ -122,7 +121,7 @@ describe('EventListeners', function() {
     expect(methods.showLove.calls.count()).toBe(1);
   });
 
-  it('should delegate an event to elements with a given css class name', function() {
+  it('should delegate an event to elements with a given css class name', function () {
     eventListener.delegate(selectedElement, 'title', 'click', methods.showLove);
 
     $('.title').trigger('click');
@@ -130,7 +129,7 @@ describe('EventListeners', function() {
     expect(methods.showLove.calls.count()).toEqual(1);
   });
 
-  it('should not delegate an event to elements without a given css class name', function() {
+  it('should not delegate an event to elements without a given css class name', function () {
     eventListener.delegate(selectedElement, 'title', 'click', methods.showLove);
 
     $('.subtitle').trigger('click');
@@ -139,7 +138,7 @@ describe('EventListeners', function() {
     expect(methods.showLove.calls.count()).toEqual(1);
   });
 
-  it('should delegate an event to elements that are added to the DOM to after delegate call', function() {
+  it('should delegate an event to elements that are added to the DOM to after delegate call', function () {
     eventListener.delegate(selectedElement, 'new-element-class', 'click', methods.showLove);
 
     var newElement = document.createElement('div');
@@ -151,7 +150,7 @@ describe('EventListeners', function() {
     expect(methods.showLove.calls.count()).toEqual(1);
   });
 
-  it('should trigger delegated event handler when clicked on an element inside a targeted element', function() {
+  it('should trigger delegated event handler when clicked on an element inside a targeted element', function () {
     eventListener.delegate(selectedElement, 'title', 'click', methods.showLove);
 
     var newElement = document.createElement('div');
@@ -165,7 +164,7 @@ describe('EventListeners', function() {
     expect(methods.showLove.calls.count()).toEqual(1);
   });
 
-  it('should not trigger delegated event handler if clicked on container of delegator', function() {
+  it('should not trigger delegated event handler if clicked on container of delegator', function () {
     var $targetElement = $('<p class="target"></p>');
     $selectedElement.append($targetElement);
 
@@ -176,7 +175,7 @@ describe('EventListeners', function() {
     expect(methods.showLove.calls.count()).toEqual(0);
   });
 
-  it('should trigger delegated event handler multiple times if event happens on multiple elements', function() {
+  it('should trigger delegated event handler multiple times if event happens on multiple elements', function () {
     eventListener.delegate(selectedElement, 'subtitle', 'click', methods.showLove);
 
     $('.subtitle').trigger('click');
@@ -184,7 +183,7 @@ describe('EventListeners', function() {
     expect(methods.showLove.calls.count()).toEqual(2);
   });
 
-  it('should not trigger method registered on element A when event id triggered on element B', function() {
+  it('should not trigger method registered on element A when event id triggered on element B', function () {
     var elementA = document.createElement('div');
     var elementB = document.createElement('div');
     $selectedElement.append(elementA);

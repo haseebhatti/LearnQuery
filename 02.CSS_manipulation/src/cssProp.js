@@ -1,5 +1,9 @@
-function cssProp() {
+function cssProp (element, property, value) {
   'use strict';
-
-  //code goes here
+  for (var prop in property) {
+    element.style[prop] = property[prop];
+  }
+  element.style[property] = value;
+  console.log(element);
+  return 'none';
 }
